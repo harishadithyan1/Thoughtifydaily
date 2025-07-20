@@ -1,0 +1,70 @@
+{% extends "layouts/main.html" %}
+
+{% block title %}
+    <title>My Posts</title>
+{% endblock title %}
+
+{% block content %}
+    {% for message in messages %}
+        <div class="alert alert-info">{{ message }}</div>
+    {% endfor %}
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-success fw-bold">My Posts</h2>
+        <a class="btn btn-success" href="{% url 'create' %}">
+            <i class="fa-solid fa-plus"></i> Create
+        </a>
+    </div>
+
+    {% if user_posts %}
+    <div class="container-fluid">
+    <div class="row">
+        {% for post in user_posts %}
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card shadow border-0 rounded-3 h-100">
+                <!-- Post Image -->
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="card-img-top rounded-top" style="height: 180px; object-fit: cover;" alt="{{ post.title }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/300x180" class="card-img-top rounded-top" alt="Default Image">
+                {% endif %}
+
+                <div class="card-body">
+                    <!-- Post Title -->
+                    <h5 class="card-title fw-bold text-success">{{ post.title|truncatewords:8 }}</h5>
+
+                    <!-- Post Content -->
+                    <p class="card-text text-muted">{{ post.content|truncatewords:20 }}</p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">
+                            <i class="bi bi-calendar"></i> {{ post.date }}
+                        </small>
+                        <small class="text-muted">
+                            <i class="bi bi-person"></i> {{ post.author }}
+                        </small>
+                    </div>
+                </div>
+                <div class="card-footer bg-white border-0 d-flex justify-content-between">
+                    <a href="{% url 'detail' post.blog_slug %}" class="btn btn-outline-success btn-sm">
+                        <i class="bi bi-eye"></i> Read More
+                    </a>
+                    <div>
+                        <a href="{% url 'edit' edit_id=post.id %}" class="btn btn-outline-primary btn-sm">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a href="{% url 'delete_task' post.id %}" class="btn btn-outline-danger btn-sm">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+
+    {% else %}
+        <p class="text-muted text-center">No posts found. <a href="{% url 'create' %}" class="text-success">Create one now!</a></p>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,86 @@
+<style>
+    .navbar {
+      position: relative; /* Ensure proper stacking context for z-index */
+      z-index: 1; /* Assign a lower z-index to the navbar */
+    }
+  
+    .dropdown-menu {
+      position: absolute;
+      z-index: 1050; /* Ensure the dropdown is above the navbar */
+    }
+  
+    img {
+      height: 70px;
+      width: 80px;
+    }
+    nav.navbar {
+      padding: 0px 30px; /* Reduced padding */
+    }
+    .profile-img {
+      width: 35px;  /* Adjust image width */
+      height: 27px; /* Adjust image height */
+      object-fit: cover; /* Ensure it maintains aspect ratio */
+      border: 2px solid white; /* Optional: Add a border */
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg" style="background-color: #122620;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#" style="color:white;">
+      <img
+            class="logo"
+            src="https://res.cloudinary.com/dl2hcx3sr/image/upload/v1733040016/2-Photoroom_ossost.png"
+            alt="Logo"
+        >
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item mt-1">
+          <a class="nav-link text-white" aria-current="page" href="{% url 'index' %}"><i class="fa-solid fa-house me-2"></i>Home</a>
+        </li>
+        {% if request.user.is_authenticated %}
+          <li class="nav-item dropdown mt-1">
+            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-list me-2"></i>Categories
+            </a>
+            <ul class="dropdown-menu">
+              {% for category in categories %}
+                <li><a class="dropdown-item" href="{% url 'category' category.slug %}">{{ category.name }}</a></li>
+              {% empty %}
+                <li><a class="dropdown-item text-muted" href="#">No Categories Available</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+          <li class="nav-item mt-1">
+            <a class="nav-link text-white" aria-current="page" href="{% url 'mypost' %}"><i class="fa-solid fa-blog"></i>My post</a>
+          </li>
+          <li class="nav-item mt-1">
+            <a class="nav-link text-white" aria-current="page" href="{% url 'about' %}"><i class="fa-solid fa-address-card me-2"></i>About</a></a>
+            
+          </li>
+          <li class="nav-item mt-1">
+            <a class="nav-link text-white" aria-current="page" href="{% url 'contact' %}"><i class="fa-regular fa-id-badge me-2"></i>Contact us</a></a>
+            
+          </li>
+         
+          <li class="nav-item mt-1">
+            <a class="nav-link text-white d-flex align-items-center" aria-current="page" href="{% url 'profile' %}">
+              <i class="fa-solid fa-user"></i>
+              <span class="ms-2">Profile</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="btn btn-success ms-2">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}" class="btn btn-success ms-2">Login</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+

@@ -1,0 +1,95 @@
+<div class="card">
+    <div class="card-body">
+        <!-- Recent Posts -->
+        <div class="post-tabs rounded bordered">
+            <h5 class="fw-bold text-success">Recent Posts</h5>
+            <div class="tab-content mt-3">
+                {% for post in recent %}
+                <div class="card mt-2 shadow-sm border-0" style="max-width: 100%; font-size: 14px;">
+                    <div class="row g-2 align-items-center">
+                        <!-- Post Image -->
+                        <div class="col-3">
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}" class="img-fluid rounded" style="height: 60px; width: 60px; object-fit: cover;" alt="{{ post.title }}">
+                            {% else %}
+                                <img src="https://via.placeholder.com/60" class="img-fluid rounded" alt="Default Image">
+                            {% endif %}
+                        </div>
+                        <!-- Post Details -->
+                        <div class="col-9">
+                            <h6 class="mb-1 fw-bold text-success" style="font-size: 14px;">
+                                <a href="{% url 'detail' post.blog_slug %}" class="text-decoration-none text-success">{{ post.title }}</a>
+                            </h6>
+                            <small class="text-muted">{{ post.author.username }} • {{ post.date }}</small>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <!-- Popular Posts -->
+        <div class="post-tabs rounded bordered">
+            <h5 class="fw-bold text-success">Popular Posts</h5>
+            <div class="tab-content mt-3">
+                {% for post in pop %}
+                <div class="card mt-2 shadow-sm border-0" style="max-width: 100%; font-size: 14px;">
+                    <div class="row g-2 align-items-center">
+                        <!-- Post Image -->
+                        <div class="col-3">
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}" class="img-fluid rounded" style="height: 60px; width: 60px; object-fit: cover;" alt="{{ post.title }}">
+                            {% else %}
+                                <img src="https://via.placeholder.com/60" class="img-fluid rounded" alt="Default Image">
+                            {% endif %}
+                        </div>
+                        <!-- Post Details -->
+                        <div class="col-9">
+                            <h6 class="mb-1 fw-bold text-success" style="font-size: 14px;">
+                                <a href="{% url 'detail' post.blog_slug %}" class="text-decoration-none text-success">{{ post.title }}</a>
+                            </h6>
+                            <small class="text-muted">{{ post.author.username }} • {{ post.date }}</small>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <!-- Trending Posts -->
+        <div class="post-tabs rounded bordered">
+            <h5 class="fw-bold text-success">Trending Posts</h5>
+            <div class="tab-content mt-3">
+                {% for post in trending %}
+                <div class="card mt-2 shadow-sm border-0" style="max-width: 100%; font-size: 14px;">
+                    <div class="row g-2 align-items-center">
+                        <!-- Post Image -->
+                        <div class="col-3">
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}" class="img-fluid rounded" style="height: 60px; width: 60px; object-fit: cover;" alt="{{ post.title }}">
+                            {% else %}
+                                <img src="https://via.placeholder.com/60" class="img-fluid rounded" alt="Default Image">
+                            {% endif %}
+                        </div>
+                        <!-- Post Details -->
+                        <div class="col-9">
+                            <h6 class="mb-1 fw-bold text-success" style="font-size: 14px;">
+                                <a href="{% url 'detail' post.blog_slug %}" class="text-decoration-none text-success">{{ post.title }}</a>
+                            </h6>
+                            <small class="text-muted">{{ post.author.username }} • {{ post.date }}</small>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

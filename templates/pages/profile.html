@@ -1,0 +1,72 @@
+{% extends "layouts/main.html" %}
+
+{% block title %}
+    <title>Profile - {{ request.user.username }}</title>
+{% endblock title %}
+
+{% block content %}
+{% for message in messages %}
+    <div class="alert alert-info">{{ message }}</div>
+{% endfor %}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-lg p-4">
+                <div class="text-center">
+                    <!-- Profile Image -->
+                    {% if request.user.userprofile.image %}
+                    <img src="{{ request.user.userprofile.image.url }}" 
+                    alt="{{ post.author.username }}" class="rounded-circle border border-success me-2" 
+                    style="width: 80px; height: 70px; object-fit: cover;">
+                  {% else %}
+                    <img src="https://res.cloudinary.com/dutovunfe/image/upload/v1739630395/profile_xx8ett.png" alt="Default Image" class="img-fluid rounded-circle profile-img">
+                  {% endif %}
+                    <h2 class="fw-bold text-primary">{{ request.user.username }}</h2>
+                    <p class="text-muted">Joined on {{ request.user.date_joined|date:"F d, Y" }}</p>
+                </div>
+
+                <!-- User Information Form -->
+                <form class="mt-3">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Full Name</label>
+                        <input type="text" class="form-control" value="{{ request.user.first_name }} {{ request.user.last_name }}" readonly>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Email Address</label>
+                        <input type="email" class="form-control" value="{{ request.user.email }}" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Username</label>
+                        <input type="text" class="form-control" value="{{ request.user.username }}" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Date of Birth</label>
+                        <input type="date" class="form-control" value="{{ request.user.userprofile.dob|date:'Y-m-d' }}" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Phone Number</label>
+                        <input type="tel" class="form-control" value="{{ request.user.userprofile.phone }}" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Address</label>
+                        <textarea class="form-control" rows="3" readonly>{{ request.user.userprofile.address }}</textarea>
+                    </div>
+                    
+                    <div class="text-center">
+                        <a href="{% url 'edit_profile' %}" class="btn btn-warning">Edit Profile</a>
+                        <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

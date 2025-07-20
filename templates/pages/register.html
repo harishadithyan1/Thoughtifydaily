@@ -1,0 +1,76 @@
+{% extends "layouts/main.html" %}
+
+{% block title %}
+    <title>Register</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-6 col-sm-12 mx-auto">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-body p-4 text-center">
+                    
+                   
+                    <div class="d-flex align-items-center justify-content-center">
+                       
+                        <div class="p-3 rounded-circle d-flex align-items-center justify-content-center" 
+                             style="background-color: #122620; width: 65px; height: 65px;">
+                            <img src="https://res.cloudinary.com/dl2hcx3sr/image/upload/v1733040016/2-Photoroom_ossost.png" 
+                                 alt="Logo" 
+                                 class="img-fluid rounded-circle"
+                                 style="max-width: 50px; max-height: 50px;">
+                        </div>
+                        
+                        
+                        <h3 class="fw-bold ms-3" style="color: #122620; margin-bottom: 0;">Thoutify</h3>
+                        <h4 class="text-success fw-bold ms-2" style="margin-bottom: 0;">| Register</h4>
+                    </div>
+
+                  
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-info mt-3">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form action="" method="POST" enctype="multipart/form-data" class="mt-4">
+                        {% csrf_token %}
+
+                        <div class="mb-3 text-start">
+                            <label for="image" class="form-label fw-bold">Profile Picture</label>
+                            <input type="file" name="image" class="form-control">
+                        </div>
+
+                        <div class="mb-3 text-start">
+                            <label for="username" class="form-label fw-bold">Name</label>
+                            <input type="text" name="username" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3 text-start">
+                            <label for="email" class="form-label fw-bold">Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3 text-start">
+                            <label for="password" class="form-label fw-bold">Password</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3 text-start">
+                            <label for="confirm_password" class="form-label fw-bold">Confirm Password</label>
+                            <input type="password" name="confirm_password" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">Register</button>
+
+                        <p class="mt-3">Already have an account? 
+                            <a href="{% url 'login' %}" class="text-primary fw-bold">Login</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

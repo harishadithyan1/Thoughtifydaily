@@ -1,0 +1,64 @@
+<style>
+    .small-profile-img {
+        width: 12px !important;
+        height: 5px !important;
+        object-fit: cover;
+    }
+    
+</style>
+
+<div class="row" id="post-container">
+    {% for post in posts|slice:":9" %}
+    <div class="col-lg-4 col-md-6 col-sm-12 mt-3 post-item">  <!-- Adjusted column size -->
+        <div class="card mb-3 shadow-sm border-0">
+            
+            <!-- Post Image -->
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" 
+                     class="img-fluid w-100 rounded-top" style="height: 150px; object-fit: cover;">
+            {% else %}
+                <img src="https://res.cloudinary.com/dutovunfe/image/upload/v1739630395/default_post_image.jpg" 
+                     alt="Default Post Image" class="img-fluid w-100 rounded-top" style="height: 150px; object-fit: cover;">
+            {% endif %}
+            
+            <div class="card-body p-2">  <!-- Reduced padding -->
+                <!-- Post Title -->
+                <h6 class="card-title fw-bold text-success">{{ post.title|truncatewords:7 }}</h6>
+
+                <!-- Post Content -->
+                <p class="card-text text-muted small">{{ post.content|truncatewords:20 }}</p>
+
+                <!-- Date -->
+                <p class="card-text">
+                    <small class="text-body-secondary">
+                        <i class="bi bi-calendar"></i> {{ post.date }}
+                    </small>
+                </p>
+
+                <!-- User Profile (Smaller Rounded Image) -->
+                <p class="card-text d-flex align-items-center justify-content-between">
+                    <span class="d-flex align-items-center">
+                        {% if post.author.userprofile.image %}
+                                 <img src="{{ post.author.userprofile.image.url }}" 
+                                 alt="{{ post.author.username }}" class="rounded-circle border border-success me-2" 
+                                 style="width: 40px; height: 30px; object-fit: cover;">
+                        {% else %}
+                        <img src="https://res.cloudinary.com/dutovunfe/image/upload/v1739630395/profile_xx8ett.png" 
+                        alt="Default Image" class="rounded-circle border border-success" 
+                        style="width: 12px; height: 5px; object-fit: cover;">
+                   
+                        {% endif %}
+                        <small class="fw-semibold text-success">
+                            {{ post.author.username }}
+                        </small>
+                    </span>
+                   
+                    <a href="{% url 'detail' post.blog_slug %}" class="btn btn-success btn-md">
+                        Read 
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

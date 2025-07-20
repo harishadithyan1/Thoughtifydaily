@@ -1,0 +1,7 @@
+#carouselExampleSlidesOnly {
+    max-width: 100%;
+}
+.carousel-inner img {
+    height: 400px;  
+    object-fit: cover;  
+}

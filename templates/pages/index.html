@@ -1,0 +1,29 @@
+{% extends "layouts/main.html" %}
+{% block title %}
+    <title>Home</title>
+{% endblock title %}
+{% block content %}
+{% for message in messages  %}
+<div class="alert alert-info alert-dismissible fade show d-flex align-items-center p-3 shadow-sm rounded-3" role="alert">
+    <i class="bi bi-info-circle me-2"></i>
+    <span>{{ message }}</span>
+    <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col-9 mt-3 ">
+                {% include 'components/carousal.html' %}
+                <div class="row">
+                    {% include 'components/cards.html' %}
+                </div>
+            </div>
+            <div class="col-3 mt-3">
+                {% include 'components/postcard.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+

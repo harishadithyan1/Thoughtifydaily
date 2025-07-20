@@ -1,0 +1,21 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/carousal.css' %}">
+
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for post in main_post %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <div class="card text-bg-dark">
+                <img src="{{ post.image.url }}" class="card-img d-block w-100" alt="{{ post.title }}">
+                <div class="card-img-overlay d-flex flex-column justify-content-end" style="background: rgba(0, 0, 0, 0.5); padding: 20px;">
+                    <h5 class="card-title text-white">{{ post.title }}</h5>
+                    <p class="card-text text-white">{{ post.content|truncatewords:50 }}</p>
+                    <p class="card-text text-white"><small>{{ post.date }}</small></p>
+                    <a href="{% url 'detail' post.blog_slug %}" class="btn btn-success" >Read</a>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
