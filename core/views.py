@@ -101,8 +101,11 @@ def register(request):
                 messages.error(request, "Username already taken!")
                 return redirect('register')
             user = User.objects.create_user(username=username, email=email, password=password)
-            UserProfile.objects.create(user=user, image=image)
+            profile = user.userprofile
+            profile.image = image
+            profile.save()
             email_message = EmailMessage(
+
                 subject=f'You have registered successfully {username}',
                 body=f'You can now log in using the link below.',
                 from_email=settings.DEFAULT_FROM_EMAIL,
