@@ -141,9 +141,9 @@ import cloudinary
 import cloudinary.uploader
 
 
-cloudinary.config( 
-    cloud_name = "dutovunfe", 
-    api_key = "292995926458554", 
+cloudinary.config(
+    cloud_name = "dutovunfe",
+    api_key = "292995926458554",
     api_secret = "IqBQHCVrLcpZAfGqu6STWfH8UzM", # Click 'View API Keys' above to copy your API secret
     secure=True
 )
